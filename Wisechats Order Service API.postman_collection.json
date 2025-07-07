@@ -1,0 +1,196 @@
+{
+	"info": {
+		"_postman_id": "2e6b3451-65d3-4fbb-a0b0-dca0f28ecd24",
+		"name": "Wisechats Order Service API",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "803333"
+	},
+	"item": [
+		{
+			"name": "001.  Get Auth Token",
+			"event": [
+				{
+					"listen": "test",
+					"script": {
+						"exec": [
+							"let jsonData = pm.response.json();",
+							"pm.environment.set(\"access_token\", jsonData.access_token);"
+						],
+						"type": "text/javascript",
+						"packages": {}
+					}
+				}
+			],
+			"request": {
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"grant_type\": \"client_credentials\",\n    \"client_id\": \"{{client_id}}\",\n    \"client_secret\": \"{{client_secret}}\",\n    \"scope\": \"orders:create orders:read orders:delete orders:update\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{service_url}}/oauth/token",
+					"host": [
+						"{{service_url}}"
+					],
+					"path": [
+						"oauth",
+						"token"
+					]
+				},
+				"description": "Obtem token para efetuar as requisições"
+			},
+			"response": []
+		},
+		{
+			"name": "002. Create Order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "POST",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customer_name\" : \"Eduardo\",\n    \"customer_email\" : \"eduardo@gmail.com\",\n    \"items\": [\n        {\n            \"name\": \"Bola\",\n            \"quantity\": 2,\n            \"unit_price\": 36.0\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{service_url}}/api/orders",
+					"host": [
+						"{{service_url}}"
+					],
+					"path": [
+						"api",
+						"orders"
+					]
+				},
+				"description": "Listagem de pedidos"
+			},
+			"response": []
+		},
+		{
+			"name": "003. Update Order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "PUT",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customer_name\" : \"Eduardo\",\n    \"customer_email\" : \"eduardo@gmail.com\",\n    \"items\": [\n        {\n            \"name\": \"Bola\",\n            \"quantity\": 8,\n            \"unit_price\": 40.0\n        }\n    ]\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{service_url}}/api/orders/1",
+					"host": [
+						"{{service_url}}"
+					],
+					"path": [
+						"api",
+						"orders",
+						"1"
+					]
+				},
+				"description": "Listagem de pedidos"
+			},
+			"response": []
+		},
+		{
+			"name": "004. Delete Order",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "DELETE",
+				"header": [],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"customer_name\" : \"Eduardo\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": {
+					"raw": "{{service_url}}/api/orders/1",
+					"host": [
+						"{{service_url}}"
+					],
+					"path": [
+						"api",
+						"orders",
+						"1"
+					]
+				},
+				"description": "Listagem de pedidos"
+			},
+			"response": []
+		},
+		{
+			"name": "004. Get Orders",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": [
+						{
+							"key": "token",
+							"value": "{{access_token}}",
+							"type": "string"
+						}
+					]
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "{{service_url}}/api/orders",
+					"host": [
+						"{{service_url}}"
+					],
+					"path": [
+						"api",
+						"orders"
+					]
+				},
+				"description": "Listagem de pedidos"
+			},
+			"response": []
+		}
+	]
+}
