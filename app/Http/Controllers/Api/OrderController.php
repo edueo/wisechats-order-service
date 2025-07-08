@@ -24,23 +24,13 @@ class OrderController extends Controller
             'data' => $orders
         ]);
     }
-
-    /**
-     * Show the form for creating a new resource.
-     */
-    public function create()
-    {
-        //
-    }
-
     /**
      * Store a newly created resource in storage.
      */
     public function store(Request $request)
     {
         
-        $validatedData = $request->validate($this->rules());
-        //dd($validatedData); 
+        $request->validate($this->rules());
         DB::beginTransaction();
 
         try {

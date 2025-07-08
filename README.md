@@ -1,20 +1,25 @@
 # Wisechats Order Service
 
 ## Setup
-TODO
 
-## Commands
+Esse projeto foi criado utilizando [Laravel Sail](https://laravel.com/docs/12.x/sail)
 
-Alias para facilitar o uso do Sail
+## Documentação
+
+O Postman foi escolhido para documentar as requisições da API, no diretório raiz existem 2 arquivos:
+
+Wisechats Order Service API.postman_collection.json  
+Wisechats - Local.postman_environment.json
+
+## Decisões de Arquitetura
+
+### Autenticação
+
+Para autenticar os endpoints foi utilizado Passport utilizando a estratégia **Password Grant**
+
+Existe um usuário de exemplo, criado via Seed, com a seguinte credencial:
+
 ```
-alias sail='[ -f sail ] && bash sail || bash vendor/bin/sail'
-```
-sail artisan migrate
-sail composer require laravel/passport
-sail artisan test
-
-
-Acessar container do mysql
-```
-sail mysql
+email: test@example.com
+senha: 123456
 ```
