@@ -13,15 +13,13 @@ use Illuminate\Support\Facades\Validator;
 
 class OrderController extends Controller
 {
-    const USER_ID = 1;
     /**
      * Display a listing of the resource.
      */
-    public function index()
+    public function index(Request $request)
     {
-        //
         $orders = Order::with('items')
-            ->where('user_id', self::USER_ID)
+            ->where('user_id', $request->user()->id)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
 
@@ -61,7 +59,7 @@ class OrderController extends Controller
                 'customer_name' => $request->customer_name,
                 'customer_email' => $request->customer_email,
                 'total' => $total,
-                'user_id' => self::USER_ID,
+                'user_id' => $request->user()->id,
             ]);
 
             // Criar itens do pedido
@@ -93,30 +91,14 @@ class OrderController extends Controller
             ], 500);
         }
     }
-    /**
-     * Display the specified resource.
-     */
-    public function show(string $id)
-    {
-        //
-    }
-
-    /**
-     * Show the form for editing the specified resource.
-     */
-    public function edit(string $id)
-    {
-        //
-    }
 
     /**
      * Update the specified resource in storage.
      */
     public function update(Request $request, string $id)
     {
-        //
 
-        $order = Order::where('user_id', self::USER_ID)->find($id);
+        $order = Order::where('user_id', $request->user()->id)->find($id);
 
         if (!$order) {
             return response()->json([

@@ -24,8 +24,8 @@ class AppServiceProvider extends ServiceProvider
         Passport::tokensExpireIn(CarbonInterval::days(15));
         Passport::refreshTokensExpireIn(CarbonInterval::days(30));
         Passport::personalAccessTokensExpireIn(CarbonInterval::months(6));
-
-         Passport::tokensCan([
+        Passport::enablePasswordGrant();
+        Passport::tokensCan([
             'orders:create' => 'Place orders',
             'orders:read' => 'Read order',
             'orders:delete' => 'Delete order',
