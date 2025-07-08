@@ -26,7 +26,7 @@
 				"header": [],
 				"body": {
 					"mode": "raw",
-					"raw": "{\n    \"grant_type\": \"client_credentials\",\n    \"client_id\": \"{{client_id}}\",\n    \"client_secret\": \"{{client_secret}}\",\n    \"scope\": \"orders:create orders:read orders:delete orders:update\"\n}",
+					"raw": "{\n    \"grant_type\": \"password\",\n    \"client_id\": \"{{client_id}}\",\n    \"client_secret\": \"{{client_secret}}\",\n    \"scope\": \"orders:create orders:read orders:delete orders:update\",\n    \"username\": \"test@example.com\",\n    \"passoword\": \"123456\"\n}",
 					"options": {
 						"raw": {
 							"language": "json"

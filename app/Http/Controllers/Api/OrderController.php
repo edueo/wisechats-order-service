@@ -8,8 +8,7 @@ use App\Models\Order;
 use Illuminate\Support\Arr;
 use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Validator;
-
-
+use App\Dto\OrderData;
 
 class OrderController extends Controller
 {
@@ -22,8 +21,8 @@ class OrderController extends Controller
             ->where('user_id', $request->user()->id)
             ->orderBy('created_at', 'desc')
             ->paginate(10);
-
-        return response()->json([
+        
+            return response()->json([
             'success' => true,
             'data' => $orders
         ]);
